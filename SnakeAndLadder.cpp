@@ -36,8 +36,6 @@ enum class StepType {
     Snake
 };
 
-
-
 // Abstract base class to represent a game element (Ladder or Snake)
 class GameElement {
     private:
@@ -73,7 +71,6 @@ class Snake : public GameElement {
     }
 };
 
-
 // Configuration for each position on the game board
 struct CurrentPositionConfig {
     std::unique_ptr<GameElement> ladder;
@@ -88,9 +85,8 @@ struct CurrentPositionConfig {
     ~CurrentPositionConfig() = default;
 };
 
-
 // Function to create the game board configuration based on the defined ladders and snakes
-std::vector<CurrentPositionConfig>& CreateGameBoard(int boardSize) {
+std::vector<CurrentPositionConfig> CreateGameBoard(int boardSize) {
     std::vector<CurrentPositionConfig> gameConfig = std::vector<CurrentPositionConfig>(boardSize);
     for (int ii = 0; ii < boardSize; ++ii) {
         auto it = GameLadderAndSnakeConfigs.find(ii); // Find if there's a ladder or snake at this position
@@ -111,13 +107,12 @@ std::vector<CurrentPositionConfig>& CreateGameBoard(int boardSize) {
     return gameConfig;
 }
 
-
 int RollDice() {
     // Return a random number between 1 and 6)
     return rand() % 6 + 1;
 }
 
-
+// Program entry point
 void main() {
     int boardSize = 100;
     std::vector<CurrentPositionConfig> gameBoard = CreateGameBoard(boardSize);
